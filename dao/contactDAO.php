@@ -31,6 +31,20 @@
         return $contacts;
       }
 
+      public function findBy($id){
+
+        $stmt = $this->conn->prepare("SELECT * FROM contacts WHERE id = :id");
+
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+
+        $contact = $stmt->fetch();
+
+        return $contact;
+
+      }
+
       public function update($id, $value){
 
         $stmt = $this->conn->prepare("");
