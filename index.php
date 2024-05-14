@@ -8,7 +8,6 @@
 	$contacts = $contactsDAO->findAll();
 
 ?>
-		<p id="msg">Teste</p>
 		<?php if(isset($msg) && $msg != ''): ?>
   			<p id="msg"><?= $msg ?></p>
     	<?php endif; ?>
