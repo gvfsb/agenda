@@ -62,10 +62,8 @@
 
 /* SHOW E CREATE */
 #view-contact-container,
-#create-contact-container{
-	max-width: 500px;
-	margin: 0 auto;
-}{
+#create-contact-container,
+#edit-contact-container{
 	max-width: 500px;
 	margin: 0 auto;
 }
