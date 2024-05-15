@@ -34,7 +34,17 @@
 		$_SESSION["msg"] = "Contato atualizado com sucesso.";
 
 		header("Location: ../index.php");
+	}
 
+	if (!empty($_POST["type"]) && $_POST["type"] === "delete") {
+		
+		$id = $_POST["id"];
+
+		$contactDAO->delete($id);
+
+		$_SESSION["msg"] = "Contato excluído com sucesso.";
+
+		header("Location: ../index.php");
 
 	}
 
