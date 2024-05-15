@@ -60,7 +60,9 @@
 
       public function delete($id){
 
-        $stmt = $this->conn->prepare("");
+        $stmt = $this->conn->prepare("DELETE FROM contacts WHERE id = :id");
+
+        $stmt->bindParam(":id", $id);
 
         $stmt->execute();
 
