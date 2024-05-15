@@ -25,7 +25,7 @@
 				<label for="phone">Observação:</label>
 				<textarea type="text" class="form-control" id="observations" name="observations" placeholder="Insira observações:" rows="3" required><?= $viewContact["observations"] ?></textarea>
 			</div>
-			
+			<button type="submit" class="btn btn-primary">Editar</button>
 		</form>
 	</div>
 <?php 
