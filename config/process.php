@@ -11,7 +11,7 @@
 		header("Location: ../index.php");	
 	}
 
-	if (!empty($_POST["create"])) {
+	if (!empty($_POST["type"])) {
 		
 		$name = $_POST['name'];
 		$phone = $_POST['phone'];
