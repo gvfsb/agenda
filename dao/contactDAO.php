@@ -45,9 +45,14 @@
 
       }
 
-      public function update($id, $value){
+      public function update($id, $name, $phone, $observations){
 
-        $stmt = $this->conn->prepare("");
+        $stmt = $this->conn->prepare("UPDATE contacts SET name = :name, phone = :phone, observations = :observations WHERE id = :id");
+
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":phone", $phone);
+        $stmt->bindParam(":observations", $observations);
 
         $stmt->execute();
 
