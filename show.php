@@ -3,7 +3,7 @@
 	include_once("templates/header.php");
 	include_once("dao/contactDAO.php");
 
-	$contactsDAO = new Contacts($conn);
+	$contactsDAO = new ContactDAO($conn);
 
 	$viewContact = $contactsDAO->findBy($_GET["id"]);
 
