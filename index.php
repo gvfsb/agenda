@@ -1,9 +1,9 @@
 <?php 
 	
 	include_once("templates/header.php");
-	include_once("dao/contactDAO.php");
+	include_once(__DIR__.'/dao/contactDAO.php');
 
-	$contactsDAO = new Contacts($conn);
+	$contactsDAO = new contactDAO($conn);
 
 	$contacts = $contactsDAO->findAll();
 
