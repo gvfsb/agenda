@@ -6,15 +6,23 @@
 	include_once("url.php");
 	include_once(__DIR__.'/../dao/contactDAO.php');
 
-	$contactDAO = new Contacts($conn);
+	$contactDAO = new ContactDAO($conn);
+
+	$id = $_POST["id"];
+	$name = $_POST['name'];
+	$phone = $_POST['phone'];
+	$observations = $_POST['observations'];
+
+	$contact = new Contact();
+
+	$contact->setId($id);
+	$contact->setName($name);
+	$contact->setPhone($phone);
+	$contact->setObservations($observations);
 
 	if (!empty($_POST["type"]) && $_POST["type"] === "create") {
-		
-		$name = $_POST['name'];
-		$phone = $_POST['phone'];
-		$observations = $_POST['observations'];
 
-		$contactDAO->create($name, $phone, $observations);
+		$contactDAO->create($contact);
 
 		$_SESSION["msg"] = "Contato criado com sucesso.";
 
@@ -23,13 +31,8 @@
 	}
 
 	if (!empty($_POST["type"]) && $_POST["type"] === "update") {
-		
-		$id = $_POST["id"];
-		$name = $_POST['name'];
-		$phone = $_POST['phone'];
-		$observations = $_POST['observations'];
 
-		$contactDAO->update($id, $name, $phone, $observations);
+		$contactDAO->update($contact);
 
 		$_SESSION["msg"] = "Contato atualizado com sucesso.";
 
@@ -37,10 +40,8 @@
 	}
 
 	if (!empty($_POST["type"]) && $_POST["type"] === "delete") {
-		
-		$id = $_POST["id"];
 
-		$contactDAO->delete($id);
+		$contactDAO->delete($contact);
 
 		$_SESSION["msg"] = "Contato excluído com sucesso.";
 
