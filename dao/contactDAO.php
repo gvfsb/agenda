@@ -1,6 +1,8 @@
 <?php
 
-  class Contacts{
+  include_once(__DIR__.'/../models/contact.php');
+
+  class ContactDAO{
 
       private $conn;
 
@@ -8,13 +10,13 @@
         $this->conn = $conn;
       }
 
-      public function create($name, $phone, $observations){
+      public function create(Contact $contact){
         
         $stmt = $this->conn->prepare("INSERT INTO contacts(name, phone, observations) VALUES(:name, :phone, :observations)");
 
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":phone", $phone);
-        $stmt->bindParam(":observations", $observations);
+        $stmt->bindParam(":name", $contact->getName());
+        $stmt->bindParam(":phone", $contact->getPhone());
+        $stmt->bindParam(":observations", $contact->getObservations());
 
         $stmt->execute();
 
