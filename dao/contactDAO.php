@@ -47,24 +47,24 @@
 
       }
 
-      public function update($id, $name, $phone, $observations){
+      public function update(Contact $contact){
 
         $stmt = $this->conn->prepare("UPDATE contacts SET name = :name, phone = :phone, observations = :observations WHERE id = :id");
 
-        $stmt->bindParam(":id", $id);
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":phone", $phone);
-        $stmt->bindParam(":observations", $observations);
+        $stmt->bindParam(":id", $contact->getId());
+        $stmt->bindParam(":name", $contact->getName());
+        $stmt->bindParam(":phone", $contact->getPhone());
+        $stmt->bindParam(":observations", $contact->getObservations());
 
         $stmt->execute();
 
       }
 
-      public function delete($id){
+      public function delete(Contact $contact){
 
         $stmt = $this->conn->prepare("DELETE FROM contacts WHERE id = :id");
 
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":id", $contact->getId());
 
         $stmt->execute();
 
