@@ -1,7 +1,7 @@
 <?php 
 	include_once("templates/header.php");
 
-	$contactsDAO = new Contacts($conn);
+	$contactsDAO = new ContactDAO($conn);
 
 	$viewContact = $contactsDAO->findBy($_GET["id"]);
 
