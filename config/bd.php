@@ -1,15 +1,16 @@
 <?php 
 
-	$host = "localhost";
+	$host = "127.0.0.1";
 	$db = "agenda";
-	$pass = "";
+	$pass = "root";
 	$user = "root";
 
 	try{
-		$conn = new PDO("mysql:dbname=$db;host=$host", $user, $pass);
+        $conn = new PDO("mysql:dbname=agenda;host=localhost;port=3307", $user, $pass);
 
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}catch(PDOException $error){
+		var_dump($conn);
 		echo "ERRO: $error";
 	}
 ?>
