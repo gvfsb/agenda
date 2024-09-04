@@ -1,5 +1,6 @@
 <?php 
-	include_once("templates/header.php");
+
+	include_once("views/includes/header.php");
 
  ?>
 
@@ -10,11 +11,11 @@
 			<input type="hidden" name="type" value="create">
 			<div class="form-group">
 				<label for="name">Nome do contato:</label>
-				<input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome:" required>	
+				<input type="text" class="form-control" id="name" name="name_user" placeholder="Digite o nome:" required>	
 			</div>
 			<div class="form-group">
-				<label for="phone">Telefone:</label>
-				<input type="text" class="form-control" id="phone" name="phone" placeholder="Digite o telefone:" required>
+				<label for="phone">Telefone/E-mail:</label>
+				<input type="text" class="form-control" id="phone" name="data_user" placeholder="Digite o telefone:" required>
 			</div>
 			<div class="form-group">
 				<label for="phone">Observação:</label>
@@ -24,5 +25,5 @@
 		</form>
 	</div>
 <?php 
-	include_once("templates/footer.php");
+	include_once("views/includes/footer.php");
 ?> 
