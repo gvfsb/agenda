@@ -1,9 +1,13 @@
 <?php 
 	
-	include_once("templates/header.php");
-	include_once("dao/contactDAO.php");
+	use App\Controllers\Contato;
 
-	$contactsDAO = new ContactDAO($conn);
+	require __DIR__ . '/vendor/autoload.php';
+	include_once("views/includes/header.php");
+	include_once(__DIR__.'/config/bd.php');
+
+
+	$contactsDAO = new Contato($conn);
 
 	$viewContact = $contactsDAO->findBy($_GET["id"]);
 
@@ -11,13 +15,13 @@
 
 	<div class="container" id="view-contact-container">
 		<?php include_once("templates/backbtn.html") ?>
-		<h1 id="main-title"><?= $viewContact["name"] ?></h1>
-		<p class="bold">Telefone: </p>
-		<p><?= $viewContact["phone"] ?></p>
+		<h1 id="main-title"><?= $viewContact["name_user"] ?></h1>
+		<p class="bold">Contato: </p>
+		<p><?= $viewContact["data_user"] ?></p>
 		<p class="bold">Observações: </p>
 		<p><?= $viewContact["observations"] ?></p>
 	</div>
 
 <?php 
-	include_once("templates/footer.php");
+	include_once("views/includes/footer.php");
 ?>
