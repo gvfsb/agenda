@@ -1,28 +1,30 @@
 <?php 
+		
+	namespace config\process;
+	use App\controllers\Contato;
 
 	session_start();
 
-	include_once("bd.php");
+	require_once("bd.php");
 	include_once("url.php");
-	include_once(__DIR__.'/../dao/contactDAO.php');
-
-	$contactDAO = new ContactDAO($conn);
 
 	$id = $_POST["id"];
-	$name = $_POST['name'];
-	$phone = $_POST['phone'];
+	$name = $_POST['name_user'];
+	$phone = $_POST['data_user'];
 	$observations = $_POST['observations'];
 
-	$contact = new Contact();
+	$contact = new Contato($conn);
 
 	$contact->setId($id);
 	$contact->setName($name);
 	$contact->setPhone($phone);
 	$contact->setObservations($observations);
 
+	
+
 	if (!empty($_POST["type"]) && $_POST["type"] === "create") {
 
-		$contactDAO->create($contact);
+		$contact->create($contact);
 
 		$_SESSION["msg"] = "Contato criado com sucesso.";
 
@@ -32,7 +34,7 @@
 
 	if (!empty($_POST["type"]) && $_POST["type"] === "update") {
 
-		$contactDAO->update($contact);
+		$contact->update();
 
 		$_SESSION["msg"] = "Contato atualizado com sucesso.";
 
@@ -41,7 +43,7 @@
 
 	if (!empty($_POST["type"]) && $_POST["type"] === "delete") {
 
-		$contactDAO->delete($contact);
+		$contact->delete();
 
 		$_SESSION["msg"] = "Contato excluído com sucesso.";
 
