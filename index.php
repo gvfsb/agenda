@@ -1,13 +1,14 @@
 <?php 
 	
-	include_once("templates/header.php");
-	include_once(__DIR__.'/controllers/contact.php');
+	use App\Controllers\Contato;
+
+	include_once("views/includes/header.php");
+	require __DIR__ . '/vendor/autoload.php';
 	include_once(__DIR__.'/config/bd.php');
 
-	$contactsDAO = new Contact($conn);
+	$contactsDAO = new Contato($conn);
 
 	$contacts = $contactsDAO->findAll();
-
 
 ?>
 		
@@ -18,31 +19,31 @@
       				<tr>
       					<th scope="col">#</th>
       					<th scope="col">Nome</th>
-      					<th scope="col">Dados:</th>
+      					<th scope="col">Contato:</th>
       					<th scope="col"></th>
       				</tr>
       			</thead>
       			<tbody>
-      				
+      				<?php foreach($contacts as $contact): ?>
       					<tr>
-      						<td scope="row" class="col-id">01</td>
-      						<td scope="row">gabriel</td>
-      						<td scope="row"><?= 21312313 ?></td>
+      						<td scope="row" class="col-id"><?= $contact["id"] ?></td>
+      						<td scope="row"><?= $contact["name_user"] ?></td>
+      						<td scope="row"><?= $contact["data_user"] ?></td>
       						<td class="actions">
-      							<a href="<"><i class="fas fa-eye check-icon"></i></a>
-      							<a href=""><i class="far fa-edit edit-icon"></i></a>
-      							<form class="delete-form" action="" method="POST">
+      							<a href="<?= $BASE_URL ?>show.php?id=<?= $contact["id"] ?>"><i class="fas fa-eye check-icon"></i></a>
+      							<a href="<?= $BASE_URL ?>edit.php?id=<?= $contact["id"] ?>"><i class="far fa-edit edit-icon"></i></a>
+      							<form class="delete-form" action="<?= $BASE_URL ?>config/process.php" method="POST">
       								<input type="hidden" name="type" value="delete" >
-      								<input type="hidden" name="id" value="<?=$BASE_URL?>edit.php">
+      								<input type="hidden" name="id" value="<?= $contact["id"] ?>">
       								<button type="submit" class="delete-btn"><i class="fas fa-times delete-icon"></i></button>
       							</form>
       						</td>
       					</tr>
-      				
+      				<?php endforeach; ?>
       			</tbody>
       		</table>
     	
 	
 <?php 
-	include_once("templates/footer.php");
+	include_once("views/includes/footer.php");
 ?>
