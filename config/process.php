@@ -1,17 +1,18 @@
 <?php 
 		
 	namespace config\process;
+	require __DIR__ . '/../vendor/autoload.php';
+	require_once("bd.php");
+	include_once("url.php");
+
 	use App\controllers\Contato;
 
 	session_start();
 
-	require_once("bd.php");
-	include_once("url.php");
-
-	$id = $_POST["id"];
-	$name = $_POST['name_user'];
-	$phone = $_POST['data_user'];
-	$observations = $_POST['observations'];
+	$id = $_POST["id"] ?? '';
+	$name = $_POST['name_user'] ?? '';
+	$phone = $_POST['data_user'] ?? '';
+	$observations = $_POST['observations'] ?? '';
 
 	$contact = new Contato($conn);
 
@@ -24,7 +25,7 @@
 
 	if (!empty($_POST["type"]) && $_POST["type"] === "create") {
 
-		$contact->create($contact);
+		$contact->create();
 
 		$_SESSION["msg"] = "Contato criado com sucesso.";
 
