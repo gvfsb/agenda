@@ -3,8 +3,6 @@
 	use App\Controllers\Contato;
 
 	include_once("views/includes/header.php");
-	include_once(__DIR__ . '/config/bd.php');
-	require __DIR__ . '/vendor/autoload.php';
 
 	$contactsDAO = new Contato($conn);
 
@@ -34,5 +32,5 @@
 		</form>
 	</div>
 <?php 
-	include_once("templates/footer.php");
+	include_once("views/includes/footer.php");
 ?> 
