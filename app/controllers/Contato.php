@@ -16,13 +16,13 @@
         $this->conn = $conn;
       }
 
-      public function create($contact){
+      public function create(){
         
         $stmt = $this->conn->prepare("INSERT INTO contacts(name_user, data_user, observations) VALUES(:name, :phone, :observations)");
 
-        $stmt->bindParam(":name", $contact->getName());
-        $stmt->bindParam(":phone", $contact->getPhone());
-        $stmt->bindParam(":observations", $contact->getObservations());
+        $stmt->bindParam(":name", $this->getName());
+        $stmt->bindParam(":phone", $this->getPhone());
+        $stmt->bindParam(":observations", $this->getObservations());
 
         $stmt->execute();
 
@@ -76,7 +76,7 @@
 
       } 
 
-      public function setId($id){
+      public function setId($id = null){
         $this->id = $id;
       }
 
@@ -92,7 +92,7 @@
         return $this->name;
       }
 
-      public function setPhone($phone){
+      public function setPhone($phone = null){
         $this->phone = $phone;
       }
 
@@ -100,7 +100,7 @@
         return $this->phone;
       }
 
-      public function setObservations($observations){
+      public function setObservations($observations = null){
         $this->observations = $observations;
       }
 
