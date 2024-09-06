@@ -1,7 +1,9 @@
 <?php
 
-	// include_once("config/process.php");
-	include_once("config/url.php");
+	include_once(__DIR__ . '/../../config/bd.php');
+	include_once(__DIR__ . "/../../config/url.php");
+	include_once(__DIR__ . '/../../config/process.php');
+	include_once( __DIR__ . '/../../vendor/autoload.php');
 
 	if(!empty($_SESSION["msg"])){
 	 	$msg = $_SESSION["msg"];
