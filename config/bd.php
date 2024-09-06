@@ -1,9 +1,4 @@
 <?php 
-	
-	namespace App\Config;
-
-	use PDO;
-	use PDOException;
 
 	$host = "127.0.0.1";
 	$db = "agenda";
