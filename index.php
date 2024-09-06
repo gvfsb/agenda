@@ -3,15 +3,14 @@
 	use App\Controllers\Contato;
 
 	include_once("views/includes/header.php");
-	require __DIR__ . '/vendor/autoload.php';
-	include_once(__DIR__.'/config/bd.php');
 
 	$contactsDAO = new Contato($conn);
 
 	$contacts = $contactsDAO->findAll();
-
 ?>
-		
+		<?php if (isset($msg) && !empty($msg)): ?>
+			<p id="msg"><?=$msg?></p>
+		<?php endif; ?>	
     	<h1 id="main-title">Dados</h1>
 		
       		<table class="table" id="contacts-table">
