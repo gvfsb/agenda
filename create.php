@@ -5,7 +5,7 @@
  ?>
 
 	<div class="container" id="create-contact-container">
-		<?php include_once("templates/backbtn.html") ?>
+		<?php include_once("views/includes/backbtn.html") ?>
 		<h1 id="main-title">Criar contato</h1>
 		<form action="config/process.php" method="POST">
 			<input type="hidden" name="type" value="create">
