@@ -14,7 +14,7 @@
 ?>
 
 	<div class="container" id="view-contact-container">
-		<?php include_once("templates/backbtn.html") ?>
+		<?php include_once("views/includes/backbtn.html") ?>
 		<h1 id="main-title"><?= $viewContact["name_user"] ?></h1>
 		<p class="bold">Contato: </p>
 		<p><?= $viewContact["data_user"] ?></p>
