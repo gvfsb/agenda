@@ -15,5 +15,8 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "slim/slim": "^4.0",
+        "rain/raintpl": "dev-master"
+    }
 }
