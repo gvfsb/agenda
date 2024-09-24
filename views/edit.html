@@ -1,0 +1,21 @@
+	<div class="container" id="edit-contact-container">
+		<div id="back-link-container">
+			<a href="{$BASE_URL}/" id="back-link">Voltar</a>
+		</div>
+		<h1 id="main-title">Editar contato</h1>
+		<form action="/editar/{$contato.id}" method="POST">
+			<div class="form-group">
+				<label for="name">Nome do contato:</label>
+				<input type="text" class="form-control" id="name_user" name="name_user" value="{$contato.name_user}" placeholder="Digite o nome:" required>	
+			</div>
+			<div class="form-group">
+				<label for="phone">Telefone/E-mail:</label>
+				<input type="text" class="form-control" id="data_user" name="data_user" value="{$contato.data_user}" placeholder="Digite o telefone:" required>
+			</div>
+			<div class="form-group">
+				<label for="phone">Observação:</label>
+				<textarea type="text" class="form-control" id="observations" name="observations" placeholder="Insira observações:" rows="3" required>{$contato.observations}</textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Editar</button>
+		</form>
+	</div>
