@@ -1,111 +1,104 @@
 <?php
 
-  namespace App\Controllers;
+    namespace App\Controllers;
 
-  use PDO;
+    use Psr\Http\Message\ResponseInterface as Response;
+    use Psr\Http\Message\ServerRequestInterface as Request;
+    use App\Config\Page;
+    use App\Config\Bd;
 
-  class Contato{
+    require '../vendor/autoload.php';
 
-      private $conn;
-      private $id;
-      private string $name;
-      private $phone;
-      private $observations;
 
-      public function __construct(PDO $conn){
-        $this->conn = $conn;
-      }
+    class Contato {
 
-      public function create(){
+	    private $conn;
+
+        public function __construct()
+        {
+            $this->conn = new Bd;
+        }
         
-        $stmt = $this->conn->prepare("INSERT INTO contacts(name_user, data_user, observations) VALUES(:name, :phone, :observations)");
+        public function index(Request $request, Response $response)
+        {
+            $contacts = $this->conn->findAll();
 
-        $stmt->bindParam(":name", $this->getName());
-        $stmt->bindParam(":phone", $this->getPhone());
-        $stmt->bindParam(":observations", $this->getObservations());
+            $page = new Page();
+            $page->setTpl("index", array(
+                'contatos' => $contacts
+            ));
 
-        $stmt->execute();
+            return $response;
+        }
 
-      }
+        public function create(Request $request, Response $response)
+        {           
+            $page = new Page();
+            $page->setTpl("create");
 
-      public function findAll(){
+            return $response;
+        }
 
-        $stmt = $this->conn->prepare("SELECT * FROM contacts");
+        public function add(Request $request, Response $response)
+        {
+            $data = $request->getParsedBody();
+            $this->conn->create($data);  // Insere o contato no banco de dados
 
-        $stmt->execute();
+            return $response->withHeader('Location', '/')->withStatus(302);
+        }
 
-        $contacts = $stmt->fetchAll();
+        public function edit(Request $request, Response $response, array $args)
+        {
+            $id = $args['id'];
 
-        return $contacts;
-      }
+            $contact = $this->conn->findBy($id);
 
-      public function findBy($id){
+            $page = new Page();
 
-        $stmt = $this->conn->prepare("SELECT * FROM contacts WHERE id = :id");
+            $page->setTpl("edit", array(
+                'contato' => $contact
+            ));;
 
-        $stmt->bindParam(":id", $id);
+            return $response;
 
-        $stmt->execute();
+        }
 
-        $contact = $stmt->fetch();
+        public function update(Request $request, Response $response, array $args)
+        {
+            $id = $args['id'];
 
-        return $contact;
+            $data = $request->getParsedBody();
 
-      }
+            $this->conn->update($id, $data);  // Edita contato
 
-      public function update(){
+            return $response->withHeader('Location', '/')->withStatus(302);
+        }
 
-        $stmt = $this->conn->prepare("UPDATE contacts SET name_user = :name, data_user = :phone, observations = :observations WHERE id = :id");
+        public function show(Request $request, Response $response, array $args)
+        {
+            
+            $id = $args['id'];
 
-        $stmt->bindParam(":id", $this->getId());
-        $stmt->bindParam(":name", $this->getName());
-        $stmt->bindParam(":phone", $this->getPhone());
-        $stmt->bindParam(":observations", $this->getObservations());
+            $contact = $this->conn->findBy($id);
 
-        $stmt->execute();
+            $page = new Page();
+            $page->setTpl("show", array(
+                'contato' => $contact
+            ));
 
-      }
+            return $response;
 
-      public function delete(){
+        }
 
-        $stmt = $this->conn->prepare("DELETE FROM contacts WHERE id = :id");
+        public function delete(Request $request, Response $response, $args)
+        {
+        $id = $args['id'];
+        var_dump($id);
+        die;
+        $this->conn->delete($id);  // Deleta o contato
 
-        $stmt->bindParam(":id", $this->getId());
-
-        $stmt->execute();
-
-      } 
-
-      public function setId($id = null){
-        $this->id = $id;
-      }
-
-      public function getId(){
-        return $this->id;
-      }
-
-      public function setName(string $name){
-        $this->name = $name;
-      }
-
-      public function getName(){
-        return $this->name;
-      }
-
-      public function setPhone($phone = null){
-        $this->phone = $phone;
-      }
-
-      public function getPhone(){
-        return $this->phone;
-      }
-
-      public function setObservations($observations = null){
-        $this->observations = $observations;
-      }
-
-      public function getObservations(){
-        return $this->observations;
-      }
-
+        return $response->withHeader('Location', '/')->withStatus(302);
+        }
     }
+
+?>
