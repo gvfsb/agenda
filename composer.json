@@ -17,6 +17,8 @@
     "minimum-stability": "dev",
     "require": {
         "slim/slim": "^4.0",
-        "rain/raintpl": "dev-master"
+        "rain/raintpl": "dev-master",
+        "slim/psr7": "dev-master",
+        "selective/basepath": " ^2.0"
     }
 }
