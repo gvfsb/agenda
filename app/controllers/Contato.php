@@ -21,7 +21,7 @@
         
         public function index(Request $request, Response $response)
         {
-            $contacts = $this->conn->findAll();
+            $contacts = $this->conn->findAll(); // Retorna todos os contatos
 
             $page = new Page();
             $page->setTpl("index", array(
@@ -41,7 +41,7 @@
 
         public function add(Request $request, Response $response)
         {
-            $data = $request->getParsedBody();
+            $data = $request->getParsedBody();            
             $this->conn->create($data);  // Insere o contato no banco de dados
 
             return $response->withHeader('Location', '/')->withStatus(302);
@@ -93,8 +93,6 @@
         public function delete(Request $request, Response $response, $args)
         {
         $id = $args['id'];
-        var_dump($id);
-        die;
         $this->conn->delete($id);  // Deleta o contato
 
         return $response->withHeader('Location', '/')->withStatus(302);
